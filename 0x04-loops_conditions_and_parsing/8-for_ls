@@ -1,8 +1,13 @@
 #!/usr/bin/env bash
-# This script lists filenames in current directory after the first dash (-)
+# Script to list non-hidden files and extract the part after the first dash if it exists
 
-for file in *-*
-do
-  name_after_dash="${file#*-}"
-  echo "$name_after_dash"
+for file in *; do
+  # Skip hidden files
+  [[ "$file" == .* ]] && continue
+
+  if [[ "$file" == *-* ]]; then
+    echo "${file#*-}"
+  else
+    echo "$file"
+  fi
 done
